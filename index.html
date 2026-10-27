@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>K-Docs · Kusarive Solutions LLC</title>
+<meta name="description" content="Gestión documental: cada documento en su carpeta, con sus versiones, su firma, su vencimiento y el registro de quién lo tocó.">
+<style>
+:root{--bg:#fafaf7;--card:#fff;--txt:#1d1d1b;--suave:#5c5c57;--linea:#e7e5df;--acento:#5B4BDB;--acento-txt:#ffffff;--ok:#18794e}
+@media (prefers-color-scheme:dark){:root{--bg:#121211;--card:#1c1c1a;--txt:#efeee9;--suave:#a3a29b;--linea:#2e2d2a;--acento:#8b7ff0;--ok:#4cc38a}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--txt);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.envoltura{max-width:1040px;margin:0 auto;padding:0 16px}
+header{padding:28px 0 8px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.marca{font-weight:800;font-size:1.15rem;letter-spacing:-.01em}
+.marca span{background:var(--acento);color:var(--acento-txt);border-radius:6px;padding:2px 7px;margin-right:6px}
+.idioma button{background:none;border:1px solid var(--linea);color:var(--txt);border-radius:999px;padding:4px 12px;cursor:pointer;font:inherit;font-size:.85rem}
+.idioma button[aria-pressed=true]{background:var(--txt);color:var(--bg)}
+.portada{padding:48px 0 24px}
+h1{font-size:clamp(2rem,5vw,3.2rem);line-height:1.1;margin:0 0 16px;letter-spacing:-.02em}
+.lema{font-size:1.15rem;color:var(--suave);max-width:680px;margin:0}
+.estado{display:inline-flex;align-items:center;gap:8px;margin-top:20px;font-size:.9rem;color:var(--suave)}
+.estado i{width:9px;height:9px;border-radius:50%;background:var(--ok);display:inline-block}
+.cifras{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:32px 0 8px}
+.cifra{background:var(--card);border:1px solid var(--linea);border-radius:14px;padding:18px 20px}
+.cifra b{display:block;font-size:2rem;letter-spacing:-.02em}
+.cifra small{color:var(--suave)}
+.nota{font-size:.82rem;color:var(--suave);margin:4px 0 0}
+h2{font-size:1.5rem;margin:56px 0 16px;letter-spacing:-.01em}
+.rejilla{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.bloque{background:var(--card);border:1px solid var(--linea);border-radius:14px;padding:18px 20px}
+.bloque h3{margin:0 0 6px;font-size:1.02rem}
+.bloque p{margin:0;color:var(--suave);font-size:.95rem}
+.capturas{display:grid;grid-template-columns:2fr 1fr;gap:14px;align-items:start}
+.capturas figure{margin:0}
+.capturas img{width:100%;height:auto;border-radius:12px;border:1px solid var(--linea);display:block}
+.capturas figcaption{font-size:.85rem;color:var(--suave);margin-top:6px}
+.pila{display:grid;gap:14px}
+.flujo{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:.95rem}
+.flujo span{background:var(--card);border:1px solid var(--linea);border-radius:10px;padding:8px 12px}
+.flujo em{color:var(--suave);font-style:normal}
+table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--linea);border-radius:14px;overflow:hidden}
+td{padding:12px 16px;border-top:1px solid var(--linea);vertical-align:top;font-size:.95rem}
+tr:first-child td{border-top:0}
+td:first-child{font-weight:700;white-space:nowrap;width:1%}
+.contacto{background:var(--card);border:1px solid var(--linea);border-radius:14px;padding:22px;display:flex;flex-wrap:wrap;gap:12px 28px;align-items:center}
+.contacto a{color:var(--txt);font-weight:600}
+.boton{background:var(--acento);color:var(--acento-txt)!important;text-decoration:none;border-radius:10px;padding:10px 16px}
+footer{padding:40px 0;color:var(--suave);font-size:.85rem}
+[data-en]{display:none}
+html[lang=en] [data-es]{display:none}
+html[lang=en] [data-en]{display:revert}
+.cifra b[data-en]{display:none}html[lang=en] .cifra b[data-es]{display:none}html[lang=en] .cifra b[data-en]{display:block}
+@media (max-width:720px){.capturas{grid-template-columns:1fr}td:first-child{white-space:normal}}
+.ancha{margin:24px 0 8px}.ancha img{width:100%;height:auto;border-radius:14px;border:1px solid var(--linea);display:block}
+.cta{background:var(--card);border:1px solid var(--linea);border-radius:14px;padding:28px;margin-top:8px}
+.cta h3{margin:0 0 6px;font-size:1.3rem}.cta p{margin:0 0 16px;color:var(--suave)}
+.movil{display:flex;gap:14px}.movil figure{flex:1}
+.portadas-movil{display:none}
+@media (max-width:700px){.ancha{display:none}.portadas-movil{display:grid;gap:14px;margin:20px 0 8px}
+.portadas-movil img{width:100%;height:auto;border-radius:12px;border:1px solid var(--linea);display:block}
+.portadas-movil figcaption{font-weight:700;margin-top:6px}}
+</style>
+</head>
+<body>
+<div class="envoltura">
+<header>
+  <div class="marca"><span>K-Docs</span><span style="background:none;color:inherit;padding:0" data-es>Gestión documental</span><span style="background:none;color:inherit;padding:0" data-en>Document management</span></div>
+  <div class="idioma" role="group" aria-label="Idioma / Language">
+    <button type="button" data-l="es" aria-pressed="true">ES</button>
+    <button type="button" data-l="en" aria-pressed="false">EN</button>
+  </div>
+</header>
+
+<section class="portada">
+  <h1 data-es>Cada documento en su lugar, con su historia, su firma y su vencimiento.</h1><h1 data-en>Every document in its place, with its history, its signature and its expiry date.</h1>
+  <p class="lema" data-es>Contratos, pólizas, actas y expedientes en una sola plataforma web, en el computador y en el celular. Con firma por enlace, alertas antes de cada vencimiento, auditoría completa y un portal donde cada empresa cliente ve solo lo suyo.</p><p class="lema" data-en>Contracts, policies, minutes and case files in one web platform, on a computer and on a phone. With signing by link, alerts before every expiry date, a full audit trail and a portal where each client company sees only its own.</p>
+  <div class="estado"><i></i><span data-es>En producción · Sistema propietario de Kusarive Solutions LLC</span><span data-en>In production · Proprietary system by Kusarive Solutions LLC</span></div>
+  <div class="cifras">
+    <div class="cifra"><b data-es>+1.450</b><b data-en>1,450+</b><small data-es>documentos, con más de 2.080 versiones</small><small data-en>documents, with over 2,080 versions</small></div>
+    <div class="cifra"><b data-es>+6.080</b><b data-en>6,080+</b><small data-es>acciones registradas en la auditoría</small><small data-en>actions in the audit trail</small></div>
+    <div class="cifra"><b>531</b><small data-es>fases de contrato con aviso y alerta</small><small data-en>contract phases with notice and alert</small></div>
+    <div class="cifra"><b>37</b><small data-es>empresas cliente</small><small data-en>client companies</small></div>
+  </div>
+  <p class="nota" data-es>Cifras reales de las instalaciones en producción, leídas el 27-oct-2026: un bufete de abogados y una planta de beneficio en Colombia. La primera lleva un año en producción.</p><p class="nota" data-en>Real figures from the installs in production, read on 27-Oct-2026: a law firm and a meat-processing plant in Colombia. The first one has been in production for a year.</p>
+</section>
+
+<div class="ancha"><img src="capturas/panel.jpg" alt="Panel principal / Main dashboard" width="1600" height="1000"></div>
+<div class="portadas-movil"><figure><img src="capturas/cliente-movil.jpg" alt="Portal del cliente / Client portal" width="520" height="1125"></figure></div>
+<p class="nota" data-es>El panel principal: documentos, contratos en aviso y en alerta, documentos por firmar y el calendario. Datos inventados; la interfaz está en español.</p><p class="nota" data-en>The main dashboard: documents, contracts in notice and alert, documents to sign and the calendar. Made-up data; the interface is in Spanish.</p>
+
+<h2 data-es>Qué hace</h2><h2 data-en>What it does</h2>
+<div class="rejilla">
+  <div class="bloque"><h3 data-es>Documentos y versiones</h3><h3 data-en>Documents and versions</h3>
+    <p data-es>Carpetas sin límite, número único por documento y cada versión conservada con su comentario.</p><p data-en>Unlimited folders, a unique number per document and every version kept with its comment.</p></div>
+  <div class="bloque"><h3 data-es>Búsqueda en el contenido</h3><h3 data-en>Search inside the content</h3>
+    <p data-es>Encuentra una frase dentro de los documentos, sin distinguir tildes. Los escaneados se leen con OCR.</p><p data-en>Finds a phrase inside the documents, ignoring accents. Scanned files are read with OCR.</p></div>
+  <div class="bloque"><h3 data-es>Contratos desde plantillas</h3><h3 data-en>Contracts from templates</h3>
+    <p data-es>Empleados, funciones por cargo y plantillas con campos automáticos. El contrato sale en PDF, numerado.</p><p data-en>Employees, job descriptions and templates with automatic fields. The contract comes out as a numbered PDF.</p></div>
+  <div class="bloque"><h3 data-es>Firma por enlace</h3><h3 data-en>Signing by link</h3>
+    <p data-es>Sin cuenta y desde el celular, con confirmación de lectura. El enlace caduca a las 72 horas.</p><p data-en>No account needed, on a phone too, with read confirmation. The link expires after 72 hours.</p></div>
+  <div class="bloque"><h3 data-es>Vencimientos por fases</h3><h3 data-en>Expiry by phases</h3>
+    <p data-es>Término, prórrogas y renovaciones con fecha de aviso y de alerta, en el panel y en el calendario.</p><p data-en>Term, extensions and renewals with notice and alert dates, on the dashboard and the calendar.</p></div>
+  <div class="bloque"><h3 data-es>Flujos de aprobación</h3><h3 data-en>Approval workflows</h3>
+    <p data-es>Pasos y transiciones con los roles que pueden darlas, firma opcional y registro de cada paso.</p><p data-en>Steps and transitions with the roles allowed to take them, optional signature and a log of every step.</p></div>
+  <div class="bloque"><h3 data-es>Portal de clientes</h3><h3 data-en>Client portal</h3>
+    <p data-es>Cada empresa cliente entra y ve sus documentos y sus contactos. Nunca los de otra.</p><p data-en>Each client company logs in and sees its documents and contacts. Never anyone else's.</p></div>
+  <div class="bloque"><h3 data-es>Enlaces de solicitud</h3><h3 data-en>Request links</h3>
+    <p data-es>Pide documentos a alguien de fuera sin darle cuenta, con contraseña, tipos y caducidad.</p><p data-en>Ask outsiders for documents without an account, with password, file types and expiry.</p></div>
+  <div class="bloque"><h3 data-es>Auditoría completa</h3><h3 data-en>Full audit trail</h3>
+    <p data-es>Cada lectura, descarga, cambio, envío y permiso queda registrado, y cada inicio de sesión.</p><p data-en>Every read, download, change, email and permission is recorded, and every sign-in.</p></div>
+  <div class="bloque"><h3 data-es>Con tu marca</h3><h3 data-en>Under your brand</h3>
+    <p data-es>Nombre, logo, icono, imagen de entrada y correo propios, y un manual en PDF para cada perfil.</p><p data-en>Your own name, logo, icon, sign-in image and email, and a PDF manual for each profile.</p></div>
+</div>
+
+<h2 data-es>Cómo se firma un documento</h2><h2 data-en>How a document gets signed</h2>
+<div class="flujo">
+  <span data-es>Se envía por enlace</span><span data-en>Sent by link</span><em>→</em>
+  <span data-es>El firmante lo revisa</span><span data-en>The signer reviews it</span><em>→</em>
+  <span data-es>Confirma la lectura</span><span data-en>Confirms reading</span><em>→</em>
+  <span data-es>Firma desde el celular</span><span data-en>Signs on a phone</span><em>→</em>
+  <span data-es>Queda guardado y registrado</span><span data-en>Stored and logged</span>
+</div>
+
+<h2 data-es>Capturas</h2><h2 data-en>Screenshots</h2>
+<div class="capturas">
+  <div class="pila">
+    <figure><img src="capturas/documentos.jpg" alt="Lista de documentos / Document list" loading="lazy" width="1600" height="1000"><figcaption data-es>La lista de documentos, con filtros por cliente, carpeta, estado y fecha.</figcaption><figcaption data-en>The document list, filtered by client, folder, status and date.</figcaption></figure>
+    <figure><img src="capturas/vista-previa.jpg" alt="Vista previa / Preview" loading="lazy" width="1600" height="1000"><figcaption data-es>Vista previa de un PDF, sin descargarlo.</figcaption><figcaption data-en>A PDF preview, without downloading it.</figcaption></figure>
+    <figure><img src="capturas/busqueda.jpg" alt="Búsqueda / Search" loading="lazy" width="1600" height="1000"><figcaption data-es>Búsqueda de «contrato» dentro del contenido.</figcaption><figcaption data-en>Searching for “contrato” inside the content.</figcaption></figure>
+    <figure><img src="capturas/plantilla.jpg" alt="Plantillas / Templates" loading="lazy" width="1600" height="1000"><figcaption data-es>Editor de plantillas con los campos que se rellenan solos.</figcaption><figcaption data-en>Template editor with the fields that fill themselves in.</figcaption></figure>
+    <figure><img src="capturas/auditoria.jpg" alt="Auditoría / Audit" loading="lazy" width="1600" height="1000"><figcaption data-es>Seguimiento de auditoría: quién hizo qué y cuándo.</figcaption><figcaption data-en>Audit trail: who did what and when.</figcaption></figure>
+    <figure><img src="capturas/permisos.jpg" alt="Permisos / Permissions" loading="lazy" width="1600" height="1000"><figcaption data-es>Permisos por rol, agrupados por pantalla.</figcaption><figcaption data-en>Permissions by role, grouped by screen.</figcaption></figure>
+  </div>
+  <div class="pila">
+    <figure><img src="capturas/firma-movil.jpg" alt="Firma en el celular / Signing on a phone" loading="lazy" width="520" height="1125"><figcaption data-es>La firma desde el celular.</figcaption><figcaption data-en>Signing on a phone.</figcaption></figure>
+    <figure><img src="capturas/cliente-movil.jpg" alt="Portal del cliente / Client portal" loading="lazy" width="520" height="1125"><figcaption data-es>El portal del cliente en el celular: solo sus documentos.</figcaption><figcaption data-en>The client portal on a phone: only its documents.</figcaption></figure>
+    <figure><img src="capturas/flujo.jpg" alt="Flujo / Workflow" loading="lazy" width="1600" height="723"><figcaption data-es>Un flujo de aprobación dibujado.</figcaption><figcaption data-en>An approval workflow, drawn.</figcaption></figure>
+    <figure><img src="capturas/vencimientos.jpg" alt="Aviso / Notice" loading="lazy" width="1230" height="372"><figcaption data-es>Contratos en periodo de aviso.</figcaption><figcaption data-en>Contracts in their notice period.</figcaption></figure>
+    <figure><img src="capturas/reportes.jpg" alt="Reportes / Reports" loading="lazy" width="1600" height="1000"><figcaption data-es>Reportes por estado, con exportación a CSV.</figcaption><figcaption data-en>Reports by status, with CSV export.</figcaption></figure>
+  </div>
+</div>
+<p class="nota" data-es>Instalación de demostración: empresas, personas y documentos inventados.</p><p class="nota" data-en>Demo install: made-up companies, people and documents.</p>
+
+<h2 data-es>Garantías técnicas</h2><h2 data-en>Technical guarantees</h2>
+<table>
+  <tr><td data-es>Aislamiento</td><td data-en>Isolation</td><td><span data-es>Un usuario de empresa cliente solo recibe del servidor lo suyo, también al pedirlo por identificador.</span><span data-en>A client-company user only receives its own data from the server, also when asking by ID.</span></td></tr>
+  <tr><td data-es>Permisos</td><td data-en>Permissions</td><td><span data-es>Más de 120 permisos por rol y por persona. Nadie da un permiso que no tiene ni se hace superadministrador.</span><span data-en>Over 120 permissions by role and person. Nobody grants what they lack or makes themselves a super admin.</span></td></tr>
+  <tr><td data-es>Trazabilidad</td><td data-en>Traceability</td><td><span data-es>Cada acción sobre cada documento, con fecha y persona; cada inicio de sesión, con su dirección IP.</span><span data-en>Every action on every document, with date and person; every sign-in, with its IP address.</span></td></tr>
+  <tr><td data-es>Integridad</td><td data-en>Integrity</td><td><span data-es>Las versiones anteriores no se pierden; archivar no es borrar.</span><span data-en>Previous versions are never lost; archiving is not deleting.</span></td></tr>
+  <tr><td data-es>Credenciales</td><td data-en>Credentials</td><td><span data-es>Contraseñas con derivación de clave (PBKDF2) y sesiones con token firmado.</span><span data-en>Passwords with key derivation (PBKDF2) and sessions with a signed token.</span></td></tr>
+  <tr><td data-es>Firma</td><td data-en>Signature</td><td><span data-es>Enlaces de un solo destinatario que caducan, con confirmación de lectura y declaración de aceptación.</span><span data-en>Single-recipient expiring links, with read confirmation and an acceptance statement.</span></td></tr>
+</table>
+
+<h2 data-es>Construido con</h2><h2 data-en>Built with</h2>
+<table>
+  <tr><td>C#</td><td><span data-es>API, permisos, documentos, contratos, firma, flujos y tareas programadas (51.800 líneas).</span><span data-en>API, permissions, documents, contracts, signatures, workflows and scheduled jobs (51,800 lines).</span></td></tr>
+  <tr><td>TypeScript</td><td><span data-es>La aplicación web (48.900 líneas).</span><span data-en>The web app (48,900 lines).</span></td></tr>
+  <tr><td>HTML · CSS</td><td><span data-es>Las pantallas y la interfaz (25.700 líneas).</span><span data-en>The screens and the interface (25,700 lines).</span></td></tr>
+  <tr><td>SQL</td><td><span data-es>Esquema y procedimientos (2.000 líneas).</span><span data-en>Schema and procedures (2,000 lines).</span></td></tr>
+</table>
+
+<h2 data-es>¿Quieres tu gestor documental?</h2><h2 data-en>Want your own document management system?</h2>
+<div class="cta">
+  <h3 data-es>Lo instalamos con tu marca</h3><h3 data-en>We set it up under your brand</h3>
+  <p data-es>Con tus carpetas, tus roles y tus plantillas. Migramos los documentos que ya tienes y capacitamos a tu equipo con un manual para cada perfil.</p><p data-en>With your folders, roles and templates. We migrate the documents you already have and train your team with a manual for each profile.</p>
+  <div class="contacto" style="border:0;padding:0;background:none">
+    <div><strong>Rafael Blanco</strong><br><span data-es>para Kusarive Solutions LLC</span><span data-en>for Kusarive Solutions LLC</span></div>
+    <a href="https://kusarive.us">kusarive.us</a>
+    <a href="mailto:info@kusarive.us">info@kusarive.us</a>
+    <a class="boton" href="https://wa.me/14073370061">WhatsApp +1 407 337 0061</a>
+  </div>
+</div>
+
+<footer>© 2026 Kusarive Solutions LLC.</footer>
+</div>
+
+<script>
+(function(){
+  var html=document.documentElement;
+  function poner(l){
+    html.lang=l;
+    document.querySelectorAll('.idioma button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.l===l)});
+    try{localStorage.setItem('idioma',l)}catch(e){}
+  }
+  document.querySelectorAll('.idioma button').forEach(function(b){b.addEventListener('click',function(){poner(b.dataset.l)})});
+  var g=null;try{g=localStorage.getItem('idioma')}catch(e){}
+  poner(g||((navigator.language||'es').slice(0,2)==='en'?'en':'es'));
+})();
+</script>
+</body>
+</html>
