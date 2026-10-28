@@ -8,7 +8,7 @@
 **Sistema propietario** de Kusarive Solutions LLC ·
 [English version](README.en.md) ·
 [Página de presentación](https://rjblancos.github.io/kdocs-showcase/) ·
-**[Descargar la presentación en PDF](presentacion/K-Docs-presentacion.pdf)** (24 diapositivas)
+**[Descargar la presentación en PDF](presentacion/K-Docs-presentacion.pdf)** (17 diapositivas)
 
 ---
 
@@ -184,6 +184,6 @@ Rafael Blanco, para Kusarive Solutions LLC
 - Web: [kusarive.us](https://kusarive.us)
 - Correo: info@kusarive.us
 - WhatsApp: [+1 407 337 0061](https://wa.me/14073370061)
-- Presentación: [PDF de 24 diapositivas](presentacion/K-Docs-presentacion.pdf)
+- Presentación: [PDF de 17 diapositivas](presentacion/K-Docs-presentacion.pdf)
 
 © 2026 Kusarive Solutions LLC. Ver [LICENSE](LICENSE).

@@ -8,7 +8,7 @@
 **Proprietary system** by Kusarive Solutions LLC ·
 [Versión en español](README.md) ·
 [Presentation page](https://rjblancos.github.io/kdocs-showcase/) ·
-**[Download the presentation as PDF](presentacion/K-Docs-presentacion.pdf)** (24 slides, in Spanish)
+**[Download the presentation as PDF](presentacion/K-Docs-presentacion.pdf)** (17 slides, in Spanish)
 
 ---
 
@@ -184,6 +184,6 @@ Rafael Blanco, for Kusarive Solutions LLC
 - Web: [kusarive.us](https://kusarive.us)
 - Email: info@kusarive.us
 - WhatsApp: [+1 407 337 0061](https://wa.me/14073370061)
-- Presentation: [24-slide PDF](presentacion/K-Docs-presentacion.pdf) (in Spanish)
+- Presentation: [17-slide PDF](presentacion/K-Docs-presentacion.pdf) (in Spanish)
 
 © 2026 Kusarive Solutions LLC. See [LICENSE](LICENSE).
