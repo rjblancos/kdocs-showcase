@@ -179,8 +179,6 @@ We set it up with your brand, your folders, your roles and your templates,
 migrate the documents you already have and train your team with a manual for
 each profile.
 
-Rafael Blanco, for Kusarive Solutions LLC
-
 - Web: [kusarive.us](https://kusarive.us)
 - Email: info@kusarive.us
 - WhatsApp: [+1 407 337 0061](https://wa.me/14073370061)

@@ -179,8 +179,6 @@ Lo instalamos con tu marca, tus carpetas, tus roles y tus plantillas, migramos
 los documentos que ya tienes y capacitamos a tu equipo con un manual para cada
 perfil.
 
-Rafael Blanco, para Kusarive Solutions LLC
-
 - Web: [kusarive.us](https://kusarive.us)
 - Correo: info@kusarive.us
 - WhatsApp: [+1 407 337 0061](https://wa.me/14073370061)
